@@ -8,7 +8,7 @@ package payrollpal;
  *
  * @author Delron Munyai
  */
-abstract class Employee {
+public abstract class Employee {
     private String name;
     private int employeeId;
     private double monthlySalary;

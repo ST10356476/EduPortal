@@ -8,7 +8,7 @@ package payrollpal;
  *
  * @author Delron Munyai
  */
-class PartTimeEmployee extends Employee {
+public class PartTimeEmployee extends Employee {
     private double hourlyRate;
     private int hoursWorked;
 

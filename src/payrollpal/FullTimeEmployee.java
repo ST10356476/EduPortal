@@ -8,7 +8,7 @@ package payrollpal;
  *
  * @author Delron Munyai
  */
-class FullTimeEmployee extends Employee {
+public class FullTimeEmployee extends Employee {
     private double annualSalary;
 
     public FullTimeEmployee(String name, int employeeId, double annualSalary) {
