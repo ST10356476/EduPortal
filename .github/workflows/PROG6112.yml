@@ -1,56 +1,66 @@
+# This is a basic workflow that is manually triggered
+
 name: TestPROG6112
 
+# Controls when the workflow will run
 on:
+  # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [main]
+    branches: [ main ]
   pull_request:
-    branches: [main]
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  # This workflow contains a single job called "build"
   build:
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      
+       # list contents or directory
       - name: List contents
         run: ls
 
-      - name: Compile classes
+     # Compiles classes to test 
+      - name: compile classes
         working-directory: ./src
-        run: |
-          javac -cp "../testresources/junit-platform-console-standalone-1.6.0.jar" \
-          ./eduportal/abcstudentmanagementapp/ABCStudentManagementApp.java \
-          ./eduportal/abcstudentmanagementapp/Student.java \
-          "../test/eduportal/abcstudentmanagementapp/StudentTest.java" \
-          ./eduportal/payrollpal/Employee.java \
-          ./eduportal/payrollpal/FullTimeEmployee.java \
-          ./eduportal/payrollpal/PartTimeEmployee.java \
-          ./eduportal/payrollpal/PayRollPal.java \
-          "../test/eduportal/payrollpal/EmployeeTest.java"
+        run: javac -cp "../testresources/junit-platform-console-standalone-1.6.0.jar" ./eduportal/abcstudentmanagementapp/ABCStudentManagementApp.java ./eduportal/abcstudentmanagementapp/Student.java "../test/eduportal/abcstudentmanagementapp/StudentTest.java" ./eduportal/payrollpal/Employee.java ./eduportal/payrollpal/FullTimeEmployee.java ./eduportal/payrollpal/PartTimeEmployee.java ./eduportal/payrollpal/PayRollPal.java   "../test/eduportal/payrollpal/EmployeeTest.java" 
 
+    # list contents of eduportal to verify that classess compiled 
       - name: List contents of src directory after compile
         working-directory: ./src/eduportal
         run: ls
-
-      - name: Copy compiled classes to testresources directory
+        
+        
+       # copy compiled classes to test directory 
+      - name : copy compiled classes to testresources directory 
         working-directory: ./src/eduportal
-        run: cp -t "../../test/abcstudentmanagementapp" Student.class "../../test/payrollpal" Employee.class
-
-      - name: Copy compiled Test classes to testresources directory
+        run: cp -t  "../../../test/abcstudentmanagementapp" Student.class "../../test/payrollpal" Employee.class"
+        
+        #copy compiled tests 
+      - name : copy compiled Test classes to testresources directory 
         working-directory: ./test/eduportal
-        run: cp -t "../../testresources/" StudentTest.class "../../testresources/" EmployeeTest.class
-
+        run: cp -t  "../testresources/" StudentTest.class "../testresources/" Employee.class
+        
+        # list contents or directory
       - name: List contents test package
         working-directory: ./test/eduportal
         run: ls
-
-      - name: Run Student Class tests and output report
+        
+        #run Student Class tests and output report 
+      - name: run tests and create report 
         working-directory: ./test/eduportal
-        run: java -jar "../../testresources/junit-platform-console-standalone-1.6.0.jar" -cp "." --select-class abcstudentmanagementapp.StudentTest
+        run: java -jar  "../../testresources/junit-platform-console-standalone-1.6.0.jar" -cp "." --select-class abcstudentmanagementapp.StudentTest 
 
-      - name: Run Employee class tests and output report
+        #run Employee class tests and output report
+      - name: run tests and create report
         working-directory: ./test/eduportal
         run: java -jar "../../testresources/junit-platform-console-standalone-1.6.0.jar" -cp "." --select-class payrollpal.EmployeeTest
