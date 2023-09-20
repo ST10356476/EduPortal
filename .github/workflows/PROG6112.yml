@@ -28,10 +28,11 @@ jobs:
        # list contents or directory
       - name: List contents
         run: ls
+
      # Compiles classes to test 
       - name: compile classes
         working-directory: ./src/eduportal
-        run: javac -cp "../testresources/junit-platform-console-standalone-1.6.0.jar" ./abcstudentmanagementapp/ABCStudentManagementApp.java ./abcstudentmanagementapp/Student.java "../test/abcstudentmanagementapp/StudentTest.java" ./payrollpal/Employee.java ./payrollpal/FullTimeEmployee.java ./payrollpal/PartTimeEmployee.java ./payrollpal/PayRollPal.java   "../test/payrollpal/EmployeeTest.java" 
+        run: javac -cp "../testresources/junit-platform-console-standalone-1.6.0.jar" ././abcstudentmanagementapp/ABCStudentManagementApp.java ././abcstudentmanagementapp/Student.java "../test/eduportal/abcstudentmanagementapp/StudentTest.java" ././payrollpal/Employee.java ././payrollpal/FullTimeEmployee.java ././payrollpal/PartTimeEmployee.java ././payrollpal/PayRollPal.java   "../test/eduportal/payrollpal/EmployeeTest.java" 
 
     # list contents of src to verify that classess compiled 
       - name: List contents of src directory after compile
