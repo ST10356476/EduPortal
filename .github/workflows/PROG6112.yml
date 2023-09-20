@@ -42,21 +42,25 @@ jobs:
         
        # copy compiled classes to test directory 
       - name : copy Student class to testresources directory 
-        working-directory: ./src
+        working-directory: ./src/abcstudentmanagementapp
         run: cp -t  "../../test/abcstudentmanagementapp"   Student.class 
     
       - name : copy Employee class to testresources directory
-        working-directory: ./src
+        working-directory: ./src/payrollpal
         run: cp -t "../../test/payrollpal" Employee.class
         
         #copy compiled tests 
-      - name : copy compiled Test classes to testresources directory 
-        working-directory: ./test
-        run: cp -t  "../testresources/" StudentTest.class "../testresources/" Employee.class
-        
+      - name : copy Student Test class to testresources directory 
+        working-directory: ./test/abcstudentmanagementapp
+        run: cp -t  "../../testresources/" StudentTest.class 
+      
+      - name : copy Employee Test class to testresources directory 
+        working-directory: ./test/payrollpal
+        run: cp -t  "../../testresources/" Employee.class
+   
         # list contents or directory
       - name: List contents test package
-        working-directory: ./test
+        working-directory: ./test/
         run: ls
         
         #run Student Class tests and output report 
