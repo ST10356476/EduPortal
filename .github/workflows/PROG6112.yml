@@ -31,10 +31,10 @@ jobs:
 
      # Compiles classes to test 
       - name: compile classes
-        working-directory: ./src/eduportal
-        run: javac -cp "../testresources/junit-platform-console-standalone-1.6.0.jar" ././abcstudentmanagementapp/ABCStudentManagementApp.java ././abcstudentmanagementapp/Student.java "../test/eduportal/abcstudentmanagementapp/StudentTest.java" ././payrollpal/Employee.java ././payrollpal/FullTimeEmployee.java ././payrollpal/PartTimeEmployee.java ././payrollpal/PayRollPal.java   "../test/eduportal/payrollpal/EmployeeTest.java" 
+        working-directory: ./src
+        run: javac -cp "../testresources/junit-platform-console-standalone-1.6.0.jar" ./eduportal/abcstudentmanagementapp/ABCStudentManagementApp.java ./eduportal/abcstudentmanagementapp/Student.java "../test/eduportal/abcstudentmanagementapp/StudentTest.java" ./eduportal/payrollpal/Employee.java ./eduportal/payrollpal/FullTimeEmployee.java ./eduportal/payrollpal/PartTimeEmployee.java ./eduportal/payrollpal/PayRollPal.java   "../test/eduportal/payrollpal/EmployeeTest.java" 
 
-    # list contents of src to verify that classess compiled 
+    # list contents of eduportal to verify that classess compiled 
       - name: List contents of src directory after compile
         working-directory: ./src/eduportal
         run: ls
@@ -43,12 +43,12 @@ jobs:
        # copy compiled classes to test directory 
       - name : copy compiled classes to testresources directory 
         working-directory: ./src/eduportal
-        run: cp -t  "../../test/abcstudentmanagementapp" Student.class "../../test/payrollpal" Employee.class"
+        run: cp -t  "../../../test/abcstudentmanagementapp" Student.class "../../test/payrollpal" Employee.class"
         
         #copy compiled tests 
       - name : copy compiled Test classes to testresources directory 
         working-directory: ./test/eduportal
-        run: cp -t  "../../testresources/" StudentTest.class "../../testresources/" Employee.class
+        run: cp -t  "../../../testresources/" StudentTest.class "../../testresources/" Employee.class
         
         # list contents or directory
       - name: List contents test package
@@ -58,9 +58,9 @@ jobs:
         #run Student Class tests and output report 
       - name: run tests and create report 
         working-directory: ./test/eduportal
-        run: java -jar  "../testresources/junit-platform-console-standalone-1.6.0.jar" -cp "." --select-class abcstudentmanagementapp.StudentTest 
+        run: java -jar  "../../testresources/junit-platform-console-standalone-1.6.0.jar" -cp "." --select-class abcstudentmanagementapp.StudentTest 
 
         #run Employee class tests and output report
       - name: run tests and create report
         working-directory: ./test/eduportal
-        run: java -jar "../testresources/junit-platform-console-standalone-1.6.0.jar" -cp "." --select-class payrollpal.EmployeeTest
+        run: java -jar "../../testresources/junit-platform-console-standalone-1.6.0.jar" -cp "." --select-class payrollpal.EmployeeTest
