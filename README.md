@@ -98,7 +98,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 ---
 
 ## Author
-- **ST10356476**
+- **Phalanndwa Munyai**
 
 ---
 
